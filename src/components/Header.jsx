@@ -132,7 +132,7 @@ export default function Header() {
         </ul>
         <div className="flex gap-6 justify-center py-4 border-t border-purple-900/30">
           <a
-            href="https://github.com/HARSHAN-ASMODAY"
+            href="https://github.com/HARSHAN-DEVHUB"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xl text-gray-400 hover:text-purple-400 transition-colors duration-200"
