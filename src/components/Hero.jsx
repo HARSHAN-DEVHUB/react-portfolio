@@ -27,7 +27,7 @@ const certifications = [
 const socialLinks = [
   {
     icon: <FaGithub />,
-    href: "https://github.com/HARSHAN-ASMODAY",
+    href: "https://github.com/HARSHAN-DEVHUB",
     label: "GitHub",
   },
   {
