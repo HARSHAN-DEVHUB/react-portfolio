@@ -82,7 +82,7 @@ export default function Header() {
           {/* Social Links */}
           <div className="flex gap-3">
             <a
-              href="https://github.com/HARSHAN-ASMODAY"
+              href="https://github.com/HARSHAN-DEVHUB"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-purple-400 transition-colors duration-200"
