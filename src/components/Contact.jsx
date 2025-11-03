@@ -189,7 +189,7 @@ export default function Contact() {
           
           <div className="flex justify-center gap-8 mt-6">
             <a 
-              href="https://github.com/HARSHAN-ASMODAY" 
+              href="https://github.com/HARSHAN-DEVHUB" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="GitHub" 
