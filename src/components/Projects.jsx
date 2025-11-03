@@ -19,7 +19,7 @@ const projects = [
     description: "A modern, responsive portfolio website showcasing my skills in React, Tailwind CSS, and web development.",
     images: ["/assets/portfolio.png", "/assets/portfolio2.png"],
     tags: ["React", "Tailwind CSS", "JavaScript", "Vite"],
-    github: "https://github.com/HARSHAN-ASMODAY/Official-portfolio",
+    github: "https://github.com/HARSHAN-DEVHUB",
     live: "https://harshan-portfolio.vercel.app",
     details:
       "A professional portfolio website built with modern web technologies. Features smooth animations, responsive design, and interactive components. Includes sections for projects, skills, about, and contact with a functional contact form.",
@@ -31,7 +31,7 @@ const projects = [
     description: "A Python application for analyzing and visualizing time series data with advanced statistical methods.",
     images: ["/assets/timeline.png"],
     tags: ["Python", "Data Analysis", "Statistics", "Visualization"],
-    github: "https://github.com/HARSHAN-ASMODAY/time-line-series",
+    github: "https://github.com/HARSHAN-DEVHUB",
     live: null,
     details:
       "A comprehensive time series analysis tool built in Python. Features data preprocessing, statistical analysis, trend detection, and interactive visualizations. Useful for financial data analysis, forecasting, and pattern recognition.",
@@ -43,7 +43,7 @@ const projects = [
     description: "A cybersecurity tool for web application vulnerability scanning and security assessment.",
     images: ["/assets/webscanner.png"],
     tags: ["Python", "Cybersecurity", "Web Security", "Penetration Testing"],
-    github: "https://github.com/HARSHAN-ASMODAY/WebScaner",
+    github: "https://github.com/HARSHAN-DEVHUB",
     live: null,
     details:
       "An automated web application security scanner designed for ethical hacking and penetration testing. Features include SQL injection detection, XSS vulnerability scanning, directory enumeration, and security report generation.",
@@ -55,7 +55,7 @@ const projects = [
     description: "A Python tool for comprehensive system reconnaissance and information collection.",
     images: ["/assets/systeminfo.png"],
     tags: ["Python", "System Administration", "Information Gathering", "Security"],
-    github: "https://github.com/HARSHAN-ASMODAY/System-information-geathering",
+    github: "https://github.com/HARSHAN-DEVHUB",
     live: null,
     details:
       "A system reconnaissance tool that collects detailed information about target systems. Features include OS detection, service enumeration, network scanning, and detailed system profiling for security assessments.",
@@ -67,7 +67,7 @@ const projects = [
     description: "A web-based billing and inventory management system for cafes and restaurants.",
     images: ["/assets/cafe-billing.png"],
     tags: ["HTML", "CSS", "JavaScript", "Billing System"],
-    github: "https://github.com/HARSHAN-ASMODAY/cafe-billing-system",
+    github: "https://github.com/HARSHAN-DEVHUB",
     live: null,
     details:
       "A complete billing and inventory management solution for food service businesses. Features include menu management, order processing, billing, inventory tracking, and sales reporting with a user-friendly interface.",
@@ -79,7 +79,7 @@ const projects = [
     description: "A web development project demonstrating modern HTML and CSS techniques.",
     images: ["/assets/wpdam.png"],
     tags: ["HTML", "CSS", "Web Design", "Responsive"],
-    github: "https://github.com/HARSHAN-ASMODAY/WPDAM-WEEK-2",
+    github: "https://github.com/HARSHAN-DEVHUB",
     live: null,
     details:
       "A responsive web design project showcasing modern HTML5 and CSS3 techniques. Features semantic markup, flexbox layouts, CSS Grid, and mobile-first responsive design principles.",

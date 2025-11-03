@@ -37,7 +37,7 @@ const socialLinks = [
   },
   {
     icon: <FaEnvelope />,
-    href: "mailto:your@email.com",
+    href: "mailto:harshanharshu66@gmail.com",
     label: "Email",
   },
 ];
