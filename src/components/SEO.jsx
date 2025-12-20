@@ -78,7 +78,7 @@ export default function SEO() {
         "url": window.location.href,
         "image": `${window.location.origin}/Me.jpg`,
         "sameAs": [
-          "https://github.com/HARSHAN-ASMODAY",
+          "https://github.com/HARSHAN-DEVHUB",
           "https://www.linkedin.com/in/harshan-harshu",
         ],
         "knowsAbout": [

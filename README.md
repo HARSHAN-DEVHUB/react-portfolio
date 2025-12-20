@@ -42,7 +42,7 @@ A modern, responsive portfolio website showcasing my skills as a Creative Develo
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/HARSHAN-ASMODAY/Official-portfolio.git
+   git clone https://github.com/HARSHAN-DEVHUB/Official-portfolio.git
    cd Official-portfolio
    ```
 
@@ -204,7 +204,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 📞 Contact
 
 - **Portfolio**: [harshan-portfolio.vercel.app](https://harshan-portfolio.vercel.app)
-- **GitHub**: [@HARSHAN-ASMODAY](https://github.com/HARSHAN-ASMODAY)
+- **GitHub**: [@HARSHAN-DEVHUB](https://github.com/HARSHAN-DEVHUB)
 - **LinkedIn**: [harshan-dev](https://linkedin.com/in/harshan-dev)
 - **Email**: harshan@example.com
 
