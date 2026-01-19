@@ -32,12 +32,12 @@ const socialLinks = [
   },
   {
     icon: <FaLinkedin />,
-    href: "https://www.linkedin.com/in/harshan-harshu",
+    href: "https://www.linkedin.com/in/harshan",
     label: "LinkedIn",
   },
   {
     icon: <FaEnvelope />,
-    href: "mailto:harshanharshu66@gmail.com",
+    href: "mailto:harshan@example.com",
     label: "Email",
   },
 ];
@@ -161,7 +161,7 @@ export default function Hero() {
             </span>
           </div>
           <p className="text-gray-400 mb-2 max-w-xl">
-            Passionate about building secure, beautiful, and performant web applications. I love exploring new tech, sharing knowledge, and collaborating with creative minds. Currently seeking new challenges and freelance opportunities.
+            Passionate full-stack developer creating innovative web applications with modern technologies. I specialize in React, Node.js, and cloud solutions, always striving to deliver exceptional user experiences and scalable solutions.
           </p>
           <div className="mb-2 italic text-fuchsia-300 text-sm">
             "Code is like humor. When you have to explain it, it’s bad." – Cory House
@@ -185,7 +185,7 @@ export default function Hero() {
               Hire Me
             </button>
             <a
-              href="/HARSHAN%20B%20RESUME.pdf"
+              href="/resume.pdf"
               download
               className="px-8 py-3 border border-purple-700 text-purple-300 rounded-lg text-sm font-semibold hover:bg-purple-700/20 transition"
               aria-label="Download my resume"
@@ -208,9 +208,9 @@ export default function Hero() {
             ))}
           </div>
           <div className="flex items-center gap-2 text-gray-500 text-sm mt-1">
-            <span>📍 Portsmouth, United kingdom</span>
+            <span>📍 New York, USA</span>
             <span className="hidden sm:inline">|</span>
-            <span className="text-green-400 font-semibold">Available for Remote</span>
+            <span className="text-green-400 font-semibold">Available for Remote Work</span>
           </div>
         </motion.div>
 
@@ -230,7 +230,7 @@ export default function Hero() {
             
             <motion.img
               src="/Me.jpg"
-              alt="Harshan"
+              alt="John Doe"
               className="w-full h-full object-cover object-center rounded-2xl"
               loading="lazy"
               whileHover={{ scale: 1.05 }}

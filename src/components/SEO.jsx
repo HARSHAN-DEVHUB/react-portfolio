@@ -5,13 +5,13 @@ export default function SEO() {
     // Update document title and meta tags
     const updateMetaTags = () => {
       // Update title
-      document.title = "Harshan - Creative Developer & Ethical Hacker | Portfolio";
+      document.title = "John Doe - Full Stack Developer | Portfolio";
       
       // Update or create meta tags
       const metaTags = {
-        'description': 'Creative developer and ethical hacker specializing in React, Node.js, and cybersecurity. View my portfolio of web applications, security tools, and innovative projects.',
-        'keywords': 'developer, ethical hacker, React, Node.js, cybersecurity, web development, portfolio, JavaScript, Python',
-        'author': 'Harshan',
+        'description': 'Full stack developer specializing in React, Node.js, and modern web technologies. View my portfolio of web applications and innovative projects.',
+        'keywords': 'developer, full stack, React, Node.js, web development, portfolio, JavaScript, TypeScript',
+        'author': 'John Doe',
         'robots': 'index, follow',
         'viewport': 'width=device-width, initial-scale=1.0',
         'theme-color': '#1f2937',
@@ -30,12 +30,12 @@ export default function SEO() {
 
       // Open Graph tags for social media
       const ogTags = {
-        'og:title': 'Harshan - Creative Developer & Ethical Hacker',
-        'og:description': 'Creative developer and ethical hacker specializing in React, Node.js, and cybersecurity. View my portfolio of web applications, security tools, and innovative projects.',
+        'og:title': 'John Doe - Full Stack Developer',
+        'og:description': 'Full stack developer specializing in React, Node.js, and modern web technologies. View my portfolio of web applications and innovative projects.',
         'og:type': 'website',
         'og:url': window.location.href,
         'og:image': `${window.location.origin}/Me.jpg`,
-        'og:site_name': 'Harshan Portfolio',
+        'og:site_name': 'John Doe Portfolio',
         'og:locale': 'en_US',
       };
 
