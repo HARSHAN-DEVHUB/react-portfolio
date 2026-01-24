@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import resumePDF from "../assets/HARSHAN B RESUME.pdf";
 import { FaGithub, FaLinkedin, FaEnvelope, FaAward } from "react-icons/fa";
 
 const phrases = [
@@ -18,11 +19,7 @@ const skills = [
   "Framer Motion",
 ];
 
-const certifications = [
-  { name: "Google Cybersecurity", icon: <FaAward className="text-yellow-400" /> },
-  { name: "AWS Certified", icon: <FaAward className="text-yellow-400" /> },
-  { name: "UI/UX Nanodegree", icon: <FaAward className="text-yellow-400" /> },
-];
+
 
 const socialLinks = [
   {
@@ -32,7 +29,7 @@ const socialLinks = [
   },
   {
     icon: <FaLinkedin />,
-    href: "https://www.linkedin.com/in/harshan",
+    href: "https://www.linkedin.com/in/harshan-harshu",
     label: "LinkedIn",
   },
   {
@@ -167,14 +164,14 @@ export default function Hero() {
             "Code is like humor. When you have to explain it, it’s bad." – Cory House
           </div>
           <div className="flex flex-wrap gap-2 mb-3 items-center">
-            {certifications.map((cert, i) => (
+            {/* {certifications.map((cert, i) => (
               <span
                 key={i}
                 className="flex items-center gap-2 px-3 py-1 bg-gray-800/60 text-yellow-200 rounded-full text-xs font-semibold hover:bg-gray-800/80 transition-colors"
               >
                 {cert.icon} {cert.name}
               </span>
-            ))}
+            ))} */}
           </div>
           <div className="flex flex-col sm:flex-row gap-4 mb-4">
             <button
@@ -185,8 +182,8 @@ export default function Hero() {
               Hire Me
             </button>
             <a
-              href="/resume.pdf"
-              download
+              href={resumePDF}
+              download="HARSHAN_B_RESUME.pdf"
               className="px-8 py-3 border border-purple-700 text-purple-300 rounded-lg text-sm font-semibold hover:bg-purple-700/20 transition"
               aria-label="Download my resume"
             >

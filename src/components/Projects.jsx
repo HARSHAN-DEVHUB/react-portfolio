@@ -12,81 +12,60 @@ import {
   FaCode,
   FaDatabase,
 } from "react-icons/fa";
-
 const projects = [
   {
-    title: "Official Portfolio",
-    description: "A modern, responsive portfolio website showcasing my skills in React, Tailwind CSS, and web development.",
-    images: ["/assets/portfolio.png", "/assets/portfolio2.png"],
-    tags: ["React", "Tailwind CSS", "JavaScript", "Vite"],
-    github: "https://github.com/HARSHAN-DEVHUB",
-    live: "https://harshan-portfolio.vercel.app",
-    details:
-      "A professional portfolio website built with modern web technologies. Features smooth animations, responsive design, and interactive components. Includes sections for projects, skills, about, and contact with a functional contact form.",
-    icon: <FaGlobe className="text-blue-400" />,
-    category: "Web Development"
+    title: "Advance Stock",
+    description: "A stock management and analysis tool. Currently researching improvements.",
+    tags: ["Stock", "Management", "Research"],
+    github: "https://github.com/HARSHAN-DEVHUB/advance-stock",
+    live: null,
+    details: "Researching to improve stock management and analysis features.",
+    icon: <FaDatabase className="text-blue-400" />,
+    category: "Research"
   },
   {
-    title: "Time Line Series",
-    description: "A Python application for analyzing and visualizing time series data with advanced statistical methods.",
-    images: ["/assets/timeline.png"],
-    tags: ["Python", "Data Analysis", "Statistics", "Visualization"],
-    github: "https://github.com/HARSHAN-DEVHUB",
+    title: "Harshan Cabs",
+    description: "A completed cab booking and management system.",
+    tags: ["Cab", "Booking", "Completed"],
+    github: "https://github.com/HARSHAN-DEVHUB/harshan-cabs",
     live: null,
-    details:
-      "A comprehensive time series analysis tool built in Python. Features data preprocessing, statistical analysis, trend detection, and interactive visualizations. Useful for financial data analysis, forecasting, and pattern recognition.",
-    icon: <FaCode className="text-green-400" />,
-    category: "Data Science"
+    details: "Cab booking and management system. Project completed.",
+    icon: <FaGlobe className="text-green-400" />,
+    category: "Completed"
   },
   {
-    title: "Web Scanner",
-    description: "A cybersecurity tool for web application vulnerability scanning and security assessment.",
-    images: ["/assets/webscanner.png"],
-    tags: ["Python", "Cybersecurity", "Web Security", "Penetration Testing"],
-    github: "https://github.com/HARSHAN-DEVHUB",
+    title: "Buddy AI",
+    description: "An AI-powered assistant. Currently in development.",
+    tags: ["AI", "Assistant", "In Progress"],
+    github: "https://github.com/HARSHAN-DEVHUB/Buddy-AI",
     live: null,
-    details:
-      "An automated web application security scanner designed for ethical hacking and penetration testing. Features include SQL injection detection, XSS vulnerability scanning, directory enumeration, and security report generation.",
-    icon: <FaShieldAlt className="text-red-400" />,
-    category: "Cybersecurity"
+    details: "Working on Buddy AI, an AI-powered assistant.",
+    icon: <FaCode className="text-purple-400" />,
+    category: "In Progress"
   },
   {
-    title: "System Information Gathering",
-    description: "A Python tool for comprehensive system reconnaissance and information collection.",
-    images: ["/assets/systeminfo.png"],
-    tags: ["Python", "System Administration", "Information Gathering", "Security"],
-    github: "https://github.com/HARSHAN-DEVHUB",
+    title: "System Info Gathering",
+    description: "A system information gathering tool. Researching improvements.",
+    tags: ["System", "Info", "Research"],
+    github: "https://github.com/HARSHAN-DEVHUB/sys-info-geathering",
     live: null,
-    details:
-      "A system reconnaissance tool that collects detailed information about target systems. Features include OS detection, service enumeration, network scanning, and detailed system profiling for security assessments.",
-    icon: <FaDatabase className="text-purple-400" />,
-    category: "Cybersecurity"
+    details: "Researching to improve system information gathering features.",
+    icon: <FaDatabase className="text-yellow-400" />,
+    category: "Research"
   },
   {
-    title: "Cafe Billing System",
-    description: "A web-based billing and inventory management system for cafes and restaurants.",
-    images: ["/assets/cafe-billing.png"],
-    tags: ["HTML", "CSS", "JavaScript", "Billing System"],
-    github: "https://github.com/HARSHAN-DEVHUB",
+    title: "E-Commerce",
+    description: "A completed e-commerce platform.",
+    tags: ["E-Commerce", "Platform", "Completed"],
+    github: "https://github.com/HARSHAN-DEVHUB/e-commerse",
     live: null,
-    details:
-      "A complete billing and inventory management solution for food service businesses. Features include menu management, order processing, billing, inventory tracking, and sales reporting with a user-friendly interface.",
-    icon: <FaGlobe className="text-orange-400" />,
-    category: "Web Development"
-  },
-  {
-    title: "WPDAM Week 2 Project",
-    description: "A web development project demonstrating modern HTML and CSS techniques.",
-    images: ["/assets/wpdam.png"],
-    tags: ["HTML", "CSS", "Web Design", "Responsive"],
-    github: "https://github.com/HARSHAN-DEVHUB",
-    live: null,
-    details:
-      "A responsive web design project showcasing modern HTML5 and CSS3 techniques. Features semantic markup, flexbox layouts, CSS Grid, and mobile-first responsive design principles.",
-    icon: <FaCode className="text-indigo-400" />,
-    category: "Web Development"
+    details: "E-commerce platform. Project completed.",
+    icon: <FaGlobe className="text-pink-400" />,
+    category: "Completed"
   }
 ];
+
+
 
 // Tag color mapping for variety
 const tagColors = [
@@ -379,12 +358,15 @@ const Projects = () => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-3">
-                  <button
-                    onClick={() => setSelectedProject(project)}
-                    className="flex-1 px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-sm font-semibold rounded-lg hover:scale-105 transition-transform duration-200"
+                  <a
+                    href={`${project.github}#readme`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-sm font-semibold rounded-lg hover:scale-105 transition-transform duration-200"
+                    aria-label="Open README on GitHub"
                   >
                     View Details
-                  </button>
+                  </a>
                   <a
                     href={project.github}
                     target="_blank"

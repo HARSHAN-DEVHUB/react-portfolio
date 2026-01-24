@@ -22,7 +22,7 @@ const experienceData = [
   {
     title: "Coimbatore Cyber Crime Officer",
     company: "",
-    year: "2021 - Now",
+    year: "2021 - 2022",
     rating: "4.90/5",
     description:
       "Took care of cyber crime records and handling cases. Took part in real time cases and solved.",
@@ -51,6 +51,8 @@ const devSkills = [
   { name: "HTML", percent: 85 },
   { name: "CSS", percent: 80 },
   { name: "JAVASCRIPT", percent: 90 },
+  { name: "REACT", percent: 95 },
+  { name: "FIREBASE", percent: 75 },
 ];
 
 const tabs = ["Education", "Professional Skills", "Experience"];
