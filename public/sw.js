@@ -1,9 +1,7 @@
-const CACHE_NAME = 'harshan-portfolio-v1';
+const CACHE_NAME = 'harshan-portfolio-v2';
 const urlsToCache = [
   '/',
-  '/index.html',
   '/Me.jpg',
-  // Add other static assets here
 ];
 
 // Install event - cache resources
@@ -15,16 +13,49 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
       })
   );
+  self.skipWaiting();
 });
 
-// Fetch event - serve from cache when offline
+// Fetch event
 self.addEventListener('fetch', (event) => {
+  const { request } = event;
+
+  if (request.method !== 'GET') {
+    return;
+  }
+
+  // HTML/navigation: always try network first to avoid stale hashed bundles
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((networkResponse) => {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put('/', responseClone));
+          return networkResponse;
+        })
+        .catch(async () => {
+          const cachedResponse = await caches.match('/');
+          return cachedResponse || Response.error();
+        })
+    );
+    return;
+  }
+
+  // Static assets: cache first, then network fallback + cache update
   event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      })
+    caches.match(request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      return fetch(request).then((networkResponse) => {
+        if (request.url.startsWith(self.location.origin)) {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+        }
+        return networkResponse;
+      });
+    })
   );
 });
 
@@ -42,6 +73,7 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
+  self.clients.claim();
 });
 
 // Background sync for offline form submissions
