@@ -227,7 +227,7 @@ export default function Hero() {
             
             <motion.img
               src="/Me.jpg"
-              alt="John Doe"
+              alt="Harshan Babu"
               className="w-full h-full object-cover object-center rounded-2xl"
               loading="lazy"
               whileHover={{ scale: 1.05 }}

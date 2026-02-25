@@ -5,13 +5,13 @@ export default function SEO() {
     // Update document title and meta tags
     const updateMetaTags = () => {
       // Update title
-      document.title = "John Doe - Full Stack Developer | Portfolio";
+      document.title = "Harshan Babu - Full Stack Developer | Portfolio";
       
       // Update or create meta tags
       const metaTags = {
         'description': 'Full stack developer specializing in React, Node.js, and modern web technologies. View my portfolio of web applications and innovative projects.',
         'keywords': 'developer, full stack, React, Node.js, web development, portfolio, JavaScript, TypeScript',
-        'author': 'John Doe',
+        'author': 'Harshan Babu',
         'robots': 'index, follow',
         'viewport': 'width=device-width, initial-scale=1.0',
         'theme-color': '#1f2937',
@@ -30,12 +30,12 @@ export default function SEO() {
 
       // Open Graph tags for social media
       const ogTags = {
-        'og:title': 'John Doe - Full Stack Developer',
+        'og:title': 'Harshan Babu - Full Stack Developer',
         'og:description': 'Full stack developer specializing in React, Node.js, and modern web technologies. View my portfolio of web applications and innovative projects.',
         'og:type': 'website',
         'og:url': window.location.href,
         'og:image': `${window.location.origin}/Me.jpg`,
-        'og:site_name': 'John Doe Portfolio',
+        'og:site_name': 'Harshan Babu Portfolio',
         'og:locale': 'en_US',
       };
 
