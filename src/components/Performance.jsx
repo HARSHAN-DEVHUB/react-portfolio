@@ -60,18 +60,6 @@ export default function Performance() {
       };
     };
 
-    // Service Worker registration (for caching)
-    const registerServiceWorker = async () => {
-      if ('serviceWorker' in navigator) {
-        try {
-          const registration = await navigator.serviceWorker.register('/sw.js');
-          console.log('SW registered: ', registration);
-        } catch (registrationError) {
-          console.log('SW registration failed: ', registrationError);
-        }
-      }
-    };
-
     // Performance monitoring
     const monitorPerformance = () => {
       // Monitor Core Web Vitals
@@ -111,7 +99,6 @@ export default function Performance() {
     preloadResources();
     lazyLoadImages();
     const cleanupScroll = optimizeScroll();
-    registerServiceWorker();
     monitorPerformance();
 
     // Cleanup
