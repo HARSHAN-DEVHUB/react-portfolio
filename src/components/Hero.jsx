@@ -126,6 +126,31 @@ export default function Hero() {
   const contentY = useTransform(mouseContentY, (y) => (isDesktopParallax ? y : 0));
   const mediaX = useTransform(mouseMediaX, (x) => (isDesktopParallax ? x : 0));
   const mediaY = useTransform(mouseMediaY, (y) => (isDesktopParallax ? y : 0));
+  const mediaRotateX = useTransform(
+    pointerYSpring,
+    [-1, 1],
+    shouldReduceMotion || !isDesktopParallax ? [0, 0] : [5, -5]
+  );
+  const mediaRotateY = useTransform(
+    pointerXSpring,
+    [-1, 1],
+    shouldReduceMotion || !isDesktopParallax ? [0, 0] : [-7, 7]
+  );
+  const orbDriftX = useTransform(
+    pointerXSpring,
+    [-1, 1],
+    shouldReduceMotion || !isDesktopParallax ? [0, 0] : [-25, 25]
+  );
+  const orbDriftY = useTransform(
+    pointerYSpring,
+    [-1, 1],
+    shouldReduceMotion || !isDesktopParallax ? [0, 0] : [-18, 18]
+  );
+  const orbOneMotionY = useTransform([orbOneY, orbDriftY], ([a, b]) => a + b);
+  const orbTwoMotionX = useTransform(orbDriftX, (v) => -v);
+  const orbTwoMotionY = useTransform([orbTwoY, orbDriftY], ([a, b]) => a - b);
+  const mediaGlowX = useTransform(mediaX, (v) => v * 0.35);
+  const mediaGlowY = useTransform(mediaY, (v) => v * 0.45);
   const contentParallaxY = useTransform([leftParallaxY, contentY], ([a, b]) => a + b);
   const mediaParallaxY = useTransform([rightParallaxY, mediaY], ([a, b]) => a + b);
 
@@ -209,7 +234,7 @@ export default function Hero() {
         {/* Animated gradient orbs */}
         <motion.div
           className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"
-          style={{ y: orbOneY }}
+            style={{ x: orbDriftX, y: orbOneMotionY }}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.4, 0.2],
@@ -222,7 +247,7 @@ export default function Hero() {
         />
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl"
-          style={{ y: orbTwoY }}
+            style={{ x: orbTwoMotionX, y: orbTwoMotionY }}
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.3, 0.1, 0.3],
@@ -338,11 +363,18 @@ export default function Hero() {
           style={{
             x: mediaX,
             y: mediaParallaxY,
+            rotateX: mediaRotateX,
+            rotateY: mediaRotateY,
+            transformPerspective: 1200,
+            transformStyle: "preserve-3d",
           }}
           className="flex justify-center md:justify-end items-center relative"
         >
           {/* Glowing background effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-3xl blur-2xl scale-110" />
+          <motion.div
+            className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 to-indigo-500/20 blur-2xl scale-110"
+            style={{ x: mediaGlowX, y: mediaGlowY }}
+          />
           
           <div className="relative w-100 h-100 md:w-120 md:h-169 rounded-2xl overflow-hidden shadow-2xl group">
             {/* Gradient overlay on hover */}
