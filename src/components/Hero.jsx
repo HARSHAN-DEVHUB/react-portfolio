@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import resumePDF from "../assets/HARSHAN B RESUME.pdf";
-import { FaGithub, FaLinkedin, FaEnvelope, FaAward } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const phrases = [
   "Creative Developer",
@@ -40,12 +47,116 @@ const socialLinks = [
 ];
 
 export default function Hero() {
+  const heroRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+
   // Typewriter logic with better variable names and separation
   const [displayText, setDisplayText] = useState("");
   const [phraseIdx, setPhraseIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isBlinking, setIsBlinking] = useState(true);
+  const [isDesktopParallax, setIsDesktopParallax] = useState(false);
+
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+
+  const pointerXSpring = useSpring(pointerX, {
+    stiffness: 120,
+    damping: 20,
+    mass: 0.25,
+  });
+
+  const pointerYSpring = useSpring(pointerY, {
+    stiffness: 120,
+    damping: 20,
+    mass: 0.25,
+  });
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 22,
+    mass: 0.4,
+  });
+
+  const bgDepth = shouldReduceMotion ? 28 : 170;
+  const leftDepth = shouldReduceMotion ? 14 : 90;
+  const rightDepth = shouldReduceMotion ? 18 : 130;
+  const orbOneDepth = shouldReduceMotion ? -18 : -130;
+  const orbTwoDepth = shouldReduceMotion ? -14 : -95;
+
+  const bgParallaxY = useTransform(smoothProgress, [0, 1], [0, bgDepth]);
+  const leftParallaxY = useTransform(smoothProgress, [0, 1], [0, leftDepth]);
+  const rightParallaxY = useTransform(smoothProgress, [0, 1], [0, rightDepth]);
+  const orbOneY = useTransform(smoothProgress, [0, 1], [0, orbOneDepth]);
+  const orbTwoY = useTransform(smoothProgress, [0, 1], [0, orbTwoDepth]);
+  const fadeOut = useTransform(
+    smoothProgress,
+    [0, 0.85, 1],
+    shouldReduceMotion ? [1, 0.95, 0.92] : [1, 0.55, 0.2]
+  );
+
+  const mouseContentX = useTransform(
+    pointerXSpring,
+    [-1, 1],
+    shouldReduceMotion ? [0, 0] : [-12, 12]
+  );
+  const mouseContentY = useTransform(
+    pointerYSpring,
+    [-1, 1],
+    shouldReduceMotion ? [0, 0] : [-8, 8]
+  );
+  const mouseMediaX = useTransform(
+    pointerXSpring,
+    [-1, 1],
+    shouldReduceMotion ? [0, 0] : [18, -18]
+  );
+  const mouseMediaY = useTransform(
+    pointerYSpring,
+    [-1, 1],
+    shouldReduceMotion ? [0, 0] : [10, -10]
+  );
+
+  const contentX = useTransform(mouseContentX, (x) => (isDesktopParallax ? x : 0));
+  const contentY = useTransform(mouseContentY, (y) => (isDesktopParallax ? y : 0));
+  const mediaX = useTransform(mouseMediaX, (x) => (isDesktopParallax ? x : 0));
+  const mediaY = useTransform(mouseMediaY, (y) => (isDesktopParallax ? y : 0));
+  const contentParallaxY = useTransform([leftParallaxY, contentY], ([a, b]) => a + b);
+  const mediaParallaxY = useTransform([rightParallaxY, mediaY], ([a, b]) => a + b);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px) and (pointer: fine)");
+
+    const updateDesktopParallax = () => {
+      setIsDesktopParallax(mediaQuery.matches && !shouldReduceMotion);
+    };
+
+    updateDesktopParallax();
+    mediaQuery.addEventListener("change", updateDesktopParallax);
+
+    return () => mediaQuery.removeEventListener("change", updateDesktopParallax);
+  }, [shouldReduceMotion]);
+
+  const handlePointerMove = (event) => {
+    if (!isDesktopParallax) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+    const y = ((event.clientY - bounds.top) / bounds.height) * 2 - 1;
+
+    pointerX.set(Math.max(-1, Math.min(1, x)));
+    pointerY.set(Math.max(-1, Math.min(1, y)));
+  };
+
+  const handlePointerLeave = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
 
   // Typewriter effect
   useEffect(() => {
@@ -84,15 +195,21 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 px-4 py-16 md:py-24 overflow-hidden">
+    <section
+      ref={heroRef}
+      className="relative min-h-screen flex items-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 px-4 py-16 md:py-24 overflow-hidden"
+      onMouseMove={handlePointerMove}
+      onMouseLeave={handlePointerLeave}
+    >
       {/* Enhanced decorative background */}
-      <div className="absolute inset-0 -z-20 pointer-events-none">
+      <motion.div className="absolute inset-0 -z-20 pointer-events-none" style={{ y: bgParallaxY }}>
         <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/40 via-fuchsia-800/10 to-indigo-900/30 blur-2xl" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/5 to-indigo-900/10" />
         
         {/* Animated gradient orbs */}
         <motion.div
           className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"
+          style={{ y: orbOneY }}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.4, 0.2],
@@ -105,6 +222,7 @@ export default function Hero() {
         />
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl"
+          style={{ y: orbTwoY }}
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.3, 0.1, 0.3],
@@ -117,10 +235,10 @@ export default function Hero() {
           }}
         />
         
-        <svg className="absolute bottom-0 left-0 w-full h-32 z-0" viewBox="0 0 1440 320">
+        <motion.svg className="absolute bottom-0 left-0 w-full h-32 z-0" viewBox="0 0 1440 320" style={{ y: orbOneY }}>
           <path fill="#a78bfa" fillOpacity="0.14" d="M0,160L80,165.3C160,171,320,181,480,165.3C640,149,800,107,960,96C1120,85,1280,107,1360,117.3L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z" />
-        </svg>
-      </div>
+        </motion.svg>
+      </motion.div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Left: Content */}
@@ -128,6 +246,7 @@ export default function Hero() {
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
+          style={{ x: contentX, y: contentParallaxY, opacity: fadeOut }}
           className="text-left flex flex-col gap-4"
         >
           <span className="inline-block bg-fuchsia-600/20 text-fuchsia-400 px-3 py-1 rounded-full text-xs font-semibold mb-1 tracking-wide uppercase w-max">
@@ -216,6 +335,10 @@ export default function Hero() {
           initial={{ opacity: 0, x: 40, scale: 0.8 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
+          style={{
+            x: mediaX,
+            y: mediaParallaxY,
+          }}
           className="flex justify-center md:justify-end items-center relative"
         >
           {/* Glowing background effect */}
