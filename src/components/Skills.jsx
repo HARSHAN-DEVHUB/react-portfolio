@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
   FaReact, FaNodeJs, FaPython, FaDatabase, FaShieldAlt, 
-  FaPalette, FaTools, FaServer, FaMobile, FaCloud 
+  FaPalette, FaTools, FaServer 
 } from "react-icons/fa";
-import { SiJavascript, SiTailwindcss, SiFirebase, SiDocker, SiKubernetes } from "react-icons/si";
+import { SiJavascript, SiTailwindcss, SiFirebase } from "react-icons/si";
 
 const skillCategories = [
   {

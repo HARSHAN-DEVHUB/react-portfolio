@@ -1,17 +1,5 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaBug, FaCertificate, FaUserShield, FaGraduationCap, FaChartLine, FaCode } from "react-icons/fa";
-
-const skills = [
-  { name: "React", level: 95 },
-  { name: "JavaScript", level: 90 },
-  { name: "Tailwind CSS", level: 90 },
-  { name: "Node.js", level: 85 },
-  { name: "Linux", level: 80 },
-  { name: "Ethical Hacking", level: 85 },
-  { name: "Firebase", level: 80 },
-  { name: "Python", level: 75 },
-];
+import { FaBug, FaCertificate, FaUserShield, FaChartLine, FaCode } from "react-icons/fa";
 
 const timeline = [
   {
@@ -34,16 +22,6 @@ const timeline = [
   },
 ];
 
-const education = [
-  {
-    degree: "B.Sc. Computer Science",
-    place: "Sample University",
-    year: "2018 – 2022",
-    detail: "Focus: cybersecurity, web dev, digital forensics.",
-    icon: <FaGraduationCap className="text-indigo-400" />,
-  },
-];
-
 const floatingIcons = [
   { icon: <FaChartLine />, style: "top-8 left-4 text-yellow-400 animate-float" },
   { icon: <FaCode />, style: "top-1/2 left-0 text-fuchsia-400 animate-float2" },
@@ -51,21 +29,6 @@ const floatingIcons = [
 ];
 
 export default function About() {
-  const [skillPercents, setSkillPercents] = useState(skills.map(() => 0));
-  useEffect(() => {
-    let raf;
-    const animate = () => {
-      setSkillPercents((prev) =>
-        prev.map((val, i) =>
-          val < skills[i].level ? Math.min(val + 1, skills[i].level) : val
-        )
-      );
-      raf = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
   return (
     <section id="about" className="py-24 bg-gray-950 text-white relative overflow-hidden">
       {/* Floating icons */}

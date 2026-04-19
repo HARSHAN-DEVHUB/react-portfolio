@@ -105,7 +105,7 @@ async function getOfflineData() {
   return response ? await response.json() : [];
 }
 
-async function saveOfflineData(data) {
+async function _saveOfflineData(data) {
   const cache = await caches.open('offline-data');
   const existingData = await getOfflineData();
   existingData.push(data);

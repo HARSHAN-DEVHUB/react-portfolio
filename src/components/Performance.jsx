@@ -22,7 +22,7 @@ export default function Performance() {
       const images = document.querySelectorAll('img[loading="lazy"]');
       
       if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
+        const imageObserver = new IntersectionObserver((entries, _observer) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               const img = entry.target;

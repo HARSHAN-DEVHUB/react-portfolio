@@ -7,12 +7,14 @@ import {
   FaChevronLeft,
   FaChevronRight,
   FaSearch,
-  FaShieldAlt,
   FaGlobe,
   FaCode,
   FaDatabase,
 } from "react-icons/fa";
-const projects = [
+
+const GITHUB_USERNAME = "HARSHAN-DEVHUB";
+
+const fallbackProjects = [
   {
     title: "Advance Stock",
     description: "A stock management and analysis tool. Currently researching improvements.",
@@ -22,6 +24,16 @@ const projects = [
     details: "Researching to improve stock management and analysis features.",
     icon: <FaDatabase className="text-blue-400" />,
     category: "Research"
+  },
+  {
+    title: "ADVANCE-EA",
+    description: "Automated trading project focused on strategy execution and market automation.",
+    tags: ["Python", "Trading", "Automation"],
+    github: "https://github.com/HARSHAN-DEVHUB/ADVANCE-EA",
+    live: null,
+    details: "Python-based automated trading repository for building and testing EA workflows.",
+    icon: <FaCode className="text-purple-400" />,
+    category: "In Progress"
   },
   {
     title: "Harshan Cabs",
@@ -44,6 +56,26 @@ const projects = [
     category: "In Progress"
   },
   {
+    title: "CRYPTO-AI",
+    description: "AI-driven experimentation for crypto market analysis.",
+    tags: ["Crypto", "AI", "Research"],
+    github: "https://github.com/HARSHAN-DEVHUB/CRYPTO-AI",
+    live: null,
+    details: "Research project focused on AI workflows and crypto market intelligence.",
+    icon: <FaDatabase className="text-cyan-400" />,
+    category: "Research"
+  },
+  {
+    title: "EA-MT5",
+    description: "A professional MetaTrader 5 expert advisor with multi-signal confirmation.",
+    tags: ["MQL5", "Trading", "EA"],
+    github: "https://github.com/HARSHAN-DEVHUB/EA-MT5",
+    live: null,
+    details: "Algorithmic trading system implementing trend analysis, pattern recognition, and risk controls.",
+    icon: <FaCode className="text-indigo-400" />,
+    category: "Completed"
+  },
+  {
     title: "System Info Gathering",
     description: "A system information gathering tool. Researching improvements.",
     tags: ["System", "Info", "Research"],
@@ -62,8 +94,122 @@ const projects = [
     details: "E-commerce platform. Project completed.",
     icon: <FaGlobe className="text-pink-400" />,
     category: "Completed"
+  },
+  {
+    title: "Drift",
+    description: "Frontend web project deployed on Vercel.",
+    tags: ["JavaScript", "Frontend", "Deployed"],
+    github: "https://github.com/HARSHAN-DEVHUB/Drift",
+    live: "https://drift-sepia.vercel.app",
+    details: "JavaScript project with a live deployed experience on Vercel.",
+    icon: <FaGlobe className="text-sky-400" />,
+    category: "Completed"
+  },
+  {
+    title: "Namakari Kadai",
+    description: "Business website project with live deployment.",
+    tags: ["JavaScript", "Business", "Deployed"],
+    github: "https://github.com/HARSHAN-DEVHUB/namakarikadai",
+    live: "https://namakarikadai.vercel.app",
+    details: "Web project for a business use case, deployed and publicly accessible.",
+    icon: <FaGlobe className="text-emerald-400" />,
+    category: "Completed"
+  },
+  {
+    title: "LH-CLOTHING",
+    description: "Clothing domain web app repository.",
+    tags: ["JavaScript", "Web App", "E-Commerce"],
+    github: "https://github.com/HARSHAN-DEVHUB/LH-CLOTHING",
+    live: null,
+    details: "Web application project in the clothing/e-commerce domain.",
+    icon: <FaGlobe className="text-rose-400" />,
+    category: "Completed"
+  },
+  {
+    title: "IRIS",
+    description: "Python-based ML experimentation repository.",
+    tags: ["Python", "Machine Learning", "Data"],
+    github: "https://github.com/HARSHAN-DEVHUB/IRIS",
+    live: null,
+    details: "Machine learning project using Python for model experimentation and analysis.",
+    icon: <FaDatabase className="text-violet-400" />,
+    category: "Research"
+  },
+  {
+    title: "Limitation of ChatBot",
+    description: "Study of chatbot limitations with offline RAG and memory-driven evaluation.",
+    tags: ["NLP", "RAG", "Research"],
+    github: "https://github.com/HARSHAN-DEVHUB/Limitation-of-ChatBot",
+    live: null,
+    details: "Research repository exploring hallucinations, context failures, and practical evaluation approaches for chatbots.",
+    icon: <FaDatabase className="text-amber-400" />,
+    category: "Research"
+  },
+  {
+    title: "Personal Assistant",
+    description: "Assistant-oriented project for productivity and automation workflows.",
+    tags: ["Assistant", "Automation", "In Progress"],
+    github: "https://github.com/HARSHAN-DEVHUB/personal-assistant",
+    live: null,
+    details: "An assistant-focused repository aimed at task support and workflow automation.",
+    icon: <FaCode className="text-teal-400" />,
+    category: "In Progress"
   }
 ];
+
+function toTitleCaseFromSlug(value) {
+  return value
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function getProjectIcon(language) {
+  const normalized = (language || "").toLowerCase();
+  if (["javascript", "typescript", "html", "css"].includes(normalized)) {
+    return <FaGlobe className="text-blue-400" />;
+  }
+  if (["python", "mql5", "shell", "makefile"].includes(normalized)) {
+    return <FaCode className="text-purple-400" />;
+  }
+  return <FaDatabase className="text-cyan-400" />;
+}
+
+function getProjectCategory(repo) {
+  if (repo.archived) {
+    return "Completed";
+  }
+
+  const lastPush = repo.pushed_at ? new Date(repo.pushed_at).getTime() : 0;
+  const daysSincePush = (Date.now() - lastPush) / (1000 * 60 * 60 * 24);
+
+  if (daysSincePush <= 120) {
+    return "In Progress";
+  }
+
+  return "Research";
+}
+
+function mapRepoToProject(repo) {
+  const topics = Array.isArray(repo.topics) ? repo.topics : [];
+  const languageTag = repo.language ? [repo.language] : [];
+  const defaultTags = languageTag.length ? languageTag : ["Project"];
+  const tags = [...new Set([...languageTag, ...topics])].slice(0, 4);
+
+  return {
+    title: toTitleCaseFromSlug(repo.name),
+    description: repo.description || "GitHub repository from my public profile.",
+    tags: tags.length ? tags : defaultTags,
+    github: repo.html_url,
+    live: repo.homepage || null,
+    details:
+      repo.description ||
+      `Public repository built with ${repo.language || "various technologies"}.`,
+    icon: getProjectIcon(repo.language),
+    category: getProjectCategory(repo),
+  };
+}
 
 
 
@@ -119,15 +265,63 @@ const Projects = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [modalImgIdx, setModalImgIdx] = useState(0);
+  const [projectsData, setProjectsData] = useState(fallbackProjects);
+  const [isSyncing, setIsSyncing] = useState(true);
+
+  // Auto-sync public repositories from GitHub profile
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchGitHubProjects = async () => {
+      try {
+        const response = await fetch(
+          `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`,
+          {
+            headers: {
+              Accept: "application/vnd.github+json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`GitHub API error: ${response.status}`);
+        }
+
+        const repos = await response.json();
+        const syncedProjects = repos
+          .filter((repo) => !repo.fork)
+          .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at))
+          .map(mapRepoToProject);
+
+        if (isMounted && syncedProjects.length > 0) {
+          setProjectsData(syncedProjects);
+        }
+      } catch (error) {
+        console.error("Failed to sync GitHub repositories:", error);
+      } finally {
+        if (isMounted) {
+          setIsSyncing(false);
+        }
+      }
+    };
+
+    fetchGitHubProjects();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Derived data
-  const tags = useMemo(() => ["All", ...uniqueTags(projects)], [projects]);
-  const categories = useMemo(() => ["All", ...uniqueCategories(projects)], [projects]);
+  const tags = useMemo(() => ["All", ...uniqueTags(projectsData)], [projectsData]);
+  const categories = useMemo(
+    () => ["All", ...uniqueCategories(projectsData)],
+    [projectsData]
+  );
 
   // Filtered & searched projects
   const filteredProjects = useMemo(() => {
-    let list = projects;
+    let list = projectsData;
     
     // Filter by category
     if (categoryFilter !== "All") {
@@ -151,7 +345,7 @@ const Projects = () => {
       );
     }
     return list;
-  }, [filter, categoryFilter, search]);
+  }, [projectsData, filter, categoryFilter, search]);
 
   // Pagination
   const totalPages = Math.ceil(filteredProjects.length / PAGE_SIZE);
@@ -166,20 +360,10 @@ const Projects = () => {
     if (selectedProject) {
       const handler = (e) => {
         if (e.key === "Escape") setSelectedProject(null);
-        if (e.key === "ArrowLeft") setModalImgIdx((idx) => Math.max(0, idx - 1));
-        if (e.key === "ArrowRight")
-          setModalImgIdx((idx) =>
-            Math.min(selectedProject.images.length - 1, idx + 1)
-          );
       };
       window.addEventListener("keydown", handler);
       return () => window.removeEventListener("keydown", handler);
     }
-  }, [selectedProject]);
-
-  // Reset image index on modal open
-  useEffect(() => {
-    setModalImgIdx(0);
   }, [selectedProject]);
 
   // Reset filters when changing pages
@@ -252,6 +436,12 @@ const Projects = () => {
         >
           Featured Projects
         </motion.h2>
+
+        <div className="text-center mb-8 text-sm text-gray-400">
+          {isSyncing
+            ? "Syncing projects from GitHub..."
+            : `Auto-synced from @${GITHUB_USERNAME} public repositories`}
+        </div>
 
         {/* Search and Filters */}
         <div className="mb-8 space-y-4">
@@ -428,7 +618,7 @@ const Projects = () => {
 
         {/* Results Count */}
         <div className="text-center mt-6 text-gray-400">
-          Showing {filteredProjects.length} of {projects.length} projects
+          Showing {filteredProjects.length} of {projectsData.length} projects
         </div>
       </div>
 
