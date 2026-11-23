@@ -1,0 +1,78 @@
+/* ---------- Self-hosted fonts ---------- */
+@font-face {
+  font-family: "Clash Display";
+  src: url("../assets/fonts/ClashDisplay-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Clash Display";
+  src: url("../assets/fonts/ClashDisplay-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Raw palette (defaults = acid_graphite; overwritten by applyTheme) ---------- */
+:root {
+  --bg: #0d0d0d;
+  --surface: #171717;
+  --text: #edede6;
+  --muted: #8a8a82;
+  --accent: #d4ff3a;
+  --accent-2: #ff5b2e;
+  --line: color-mix(in srgb, var(--text) 13%, transparent);
+  --line-strong: color-mix(in srgb, var(--text) 28%, transparent);
+
+  --gutter: clamp(1rem, 3.2vw, 3rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ---------- Tailwind tokens (default palette removed) ---------- */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --font-*: initial;
+  --font-display: "Clash Display", "Arial Narrow", sans-serif;
+  --font-body: "Satoshi", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --tracking-tightest: -0.045em;
+  --tracking-display: -0.03em;
+  --tracking-label: 0.14em;
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+}

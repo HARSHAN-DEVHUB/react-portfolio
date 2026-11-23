@@ -2,54 +2,98 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- SEO Meta Tags -->
-    <title>Harshan - Creative Developer & Ethical Hacker | Portfolio</title>
-    <meta name="description" content="Harshan is a creative developer and ethical hacker specializing in React, Node.js, and cybersecurity. View projects, skills, and get in touch for collaboration." />
-    <meta name="keywords" content="developer, ethical hacker, React, Node.js, cybersecurity, portfolio, web development" />
-    <meta name="author" content="Harshan" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://harshan-portfolio.vercel.app/" />
-    <meta property="og:title" content="Harshan - Creative Developer & Ethical Hacker" />
-    <meta property="og:description" content="Passionate about building secure, beautiful, and performant web applications. Specializing in React, Node.js, and cybersecurity." />
-    <meta property="og:image" content="https://harshan-portfolio.vercel.app/Me.jpg" />
-    <meta property="og:site_name" content="Harshan Portfolio" />
-    <meta property="og:locale" content="en_US" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://harshan-portfolio.vercel.app/" />
-    <meta property="twitter:title" content="Harshan - Creative Developer & Ethical Hacker" />
-    <meta property="twitter:description" content="Passionate about building secure, beautiful, and performant web applications. Specializing in React, Node.js, and cybersecurity." />
-    <meta property="twitter:image" content="https://harshan-portfolio.vercel.app/Me.jpg" />
-    <meta property="twitter:creator" content="@harshan_dev" />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/letter-h.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="color-scheme" content="dark" />
 
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Harshan Babu — Full-Stack Developer & Security Analyst</title>
+    <meta
+      name="description"
+      content="Harshan Babu builds secure web products — React and Node commerce platforms, Python computer vision, offline AI chatbots — then pen-tests them. MSc Information Systems, University of Portsmouth."
+    />
+    <meta name="author" content="Harshan Babu" />
+    <link rel="canonical" href="https://harshanoff.vercel.app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://harshanoff.vercel.app/" />
+    <meta property="og:site_name" content="Harshan Babu" />
+    <meta property="og:title" content="Harshan Babu — Full-Stack Developer & Security Analyst" />
+    <meta property="og:description" content="I build it. Then I break it. Full-stack products, shipped and attacked before anyone else can." />
+    <meta property="og:image" content="https://harshanoff.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Harshan Babu — Full-Stack Developer & Security Analyst, with a 3D avatar" />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Harshan Babu — Full-Stack Developer & Security Analyst" />
+    <meta name="twitter:description" content="I build it. Then I break it. Full-stack products, shipped and attacked before anyone else can." />
+    <meta name="twitter:image" content="https://harshanoff.vercel.app/og-image.png" />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Start fetching the avatar early -->
+    <link rel="preload" href="/models/avatar.glb" as="fetch" type="model/gltf-binary" crossorigin />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Harshan Babu",
+        "alternateName": "Harshan",
+        "jobTitle": "Full-Stack Developer & Security Analyst",
+        "url": "https://harshanoff.vercel.app/",
+        "image": "https://harshanoff.vercel.app/og-image.png",
+        "email": "mailto:harshanharshu66@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Portsmouth", "addressCountry": "GB" },
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "University of Portsmouth" },
+          { "@type": "CollegeOrUniversity", "name": "Rathinam College of Arts and Science" }
+        ],
+        "knowsAbout": ["React", "Node.js", "Python", "Penetration Testing", "Digital Forensics", "Three.js", "PostgreSQL", "Machine Learning"],
+        "sameAs": ["https://github.com/HARSHAN-DEVHUB", "https://www.linkedin.com/in/harshan-harshu"]
+      }
+    </script>
+
+    <style>
+      /* Paint the right background before CSS loads (no white flash) */
+      html, body { background: #0d0d0d; color: #edede6; margin: 0; }
+      #boot { position: fixed; inset: 0; z-index: 119; background: #171717; color: #edede6;
+        display: flex; flex-direction: column; justify-content: space-between;
+        padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1rem, 3.2vw, 3rem) calc(clamp(1.5rem, 2.5vw, 2.5rem) + 2.5rem); }
+      #boot span { font: 500 12px/1.4 ui-monospace, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; }
+      #boot b { align-self: flex-end; font: 600 clamp(6rem, 24vw, 22rem)/.8 "Arial Narrow", Arial, sans-serif; letter-spacing: -.04em; }
+    </style>
   </head>
   <body>
+    <noscript>
+      <p style="padding: 2rem; font-family: sans-serif">
+        Harshan Babu — Full-Stack Developer & Security Analyst. This site needs JavaScript for its 3D scenes.
+        Email: harshanharshu66@gmail.com · GitHub: github.com/HARSHAN-DEVHUB
+      </p>
+    </noscript>
+    <!-- Instant loading screen (plain HTML) shown while the JavaScript downloads;
+         the React loader replaces it seamlessly. -->
+    <div id="boot" aria-hidden="true">
+      <span>Harshan Babu</span>
+      <b>000</b>
+    </div>
     <div id="root"></div>
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', async () => {
-          try {
-            const registrations = await navigator.serviceWorker.getRegistrations();
-            await Promise.all(registrations.map((registration) => registration.unregister()));
-            if ('caches' in window) {
-              const cacheKeys = await caches.keys();
-              await Promise.all(cacheKeys.map((cacheKey) => caches.delete(cacheKey)));
-            }
-          } catch (error) {
-            console.error('Service worker cleanup failed:', error);
-          }
+      // The previous version of this site registered a service worker. Remove it and its caches.
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (regs) {
+          regs.forEach(function (r) { r.unregister(); });
         });
+        if ("caches" in window) {
+          caches.keys().then(function (keys) { keys.forEach(function (k) { caches.delete(k); }); });
+        }
       }
     </script>
     <script type="module" src="/src/main.jsx"></script>

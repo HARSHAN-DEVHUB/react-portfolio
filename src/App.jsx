@@ -1,68 +1,82 @@
-import { useState, useEffect } from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import LoadingSpinner from "./components/LoadingSpinner";
-import Analytics from "./components/Analytics";
-import SEO from "./components/SEO";
-import Performance from "./components/Performance";
-import Resume from "./components/Resume";
-import ErrorBoundary from "./components/ErrorBoundary";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { SiteContext } from "./context/SiteContext";
+import { useLenis, startScroll, stopScroll } from "./hooks/useLenis";
+import { useFinePointer, useIsDesktop, useReducedMotion } from "./hooks/useIsMobile";
+import { canRender3D } from "./lib/device";
+import { profile } from "./data/profile";
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isVisible, setIsVisible] = useState(false);
+import Loader from "./components/ui/Loader";
+import Grain from "./components/ui/Grain";
+import Cursor from "./components/ui/Cursor";
+import Nav from "./components/ui/Nav";
+import Marquee from "./components/ui/Marquee";
+import ProjectDistortion from "./components/canvas/ProjectDistortion";
 
+import Hero from "./components/sections/Hero";
+import About from "./components/sections/About";
+import Skills from "./components/sections/Skills";
+import Projects from "./components/sections/Projects";
+import Experience from "./components/sections/Experience";
+import Achievements from "./components/sections/Achievements";
+import Contact from "./components/sections/Contact";
+import Footer from "./components/sections/Footer";
+
+export default function App() {
+  const reduced = useReducedMotion();
+  const isDesktop = useIsDesktop();
+  const fine = useFinePointer();
+  const [webgl] = useState(() => canRender3D());
+  const [introDone, setIntroDone] = useState(false);
+
+  useLenis(!reduced);
+
+  // Always start at the top; lock scrolling behind the loader.
   useEffect(() => {
-    // Simulate loading time for better UX
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      setIsVisible(true);
-    }, 1500);
-
-    return () => clearTimeout(timer);
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  useEffect(() => {
+    const html = document.documentElement;
+    if (!introDone) {
+      stopScroll();
+      html.style.overflow = "hidden";
+      return;
+    }
+    html.style.overflow = "";
+    startScroll();
+  }, [introDone]);
+
+  const finishIntro = useCallback(() => setIntroDone(true), []);
+  const ctx = useMemo(() => ({ introDone, webgl, reduced }), [introDone, webgl, reduced]);
 
   return (
-    <ErrorBoundary>
-      <div className={`bg-black text-white scroll-smooth transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        {/* Background gradient overlay */}
-        <div className="fixed inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-black pointer-events-none z-0" />
-        
-        {/* Animated background particles */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-purple-500 rounded-full animate-pulse opacity-20" />
-          <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-indigo-500 rounded-full animate-ping opacity-30" />
-          <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-fuchsia-500 rounded-full animate-bounce opacity-15" />
-          <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse opacity-25" />
-        </div>
+    <SiteContext.Provider value={ctx}>
+      <a
+        href="#main"
+        className="label fixed left-4 top-4 z-[130] -translate-y-24 bg-accent px-4 py-3 !text-bg focus:translate-y-0"
+      >
+        Skip to content
+      </a>
 
-        <div className="relative z-10">
-          <SEO />
-          <Analytics />
-          <Performance />
-          <Header />
-          <main className="pt-16">
-            <section id="hero"><Hero /></section>
-            <About />
-            <Skills />
-            <Projects />
-            <Resume />
-            <Contact />
-          </main>
-          <Footer />
-        </div>
-      </div>
-    </ErrorBoundary>
+      {!introDone && <Loader wait3D={webgl} reduced={reduced} onDone={finishIntro} />}
+      <Grain />
+      <Cursor />
+      <Nav />
+
+      <main id="main" className="relative overflow-x-clip">
+        <Hero />
+        <Marquee items={profile.marquee} />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Achievements />
+        <Contact />
+      </main>
+      <Footer />
+
+      {introDone && webgl && isDesktop && fine && !reduced && <ProjectDistortion />}
+    </SiteContext.Provider>
   );
 }
-
-export default App;
